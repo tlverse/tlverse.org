@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on My blog</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on My blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>yourname@example.com (yourname)</managingEditor>
+    <webMaster>yourname@example.com (yourname)</webMaster>
+    <copyright>(c) 2016 Copyright my blog</copyright>
+    <lastBuildDate>Sun, 24 Apr 2016 02:50:28 +0200</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What is Hugo?</title>
+      <link>/2016/04/24/what-is-hugo/</link>
+      <pubDate>Sun, 24 Apr 2016 02:50:28 +0200</pubDate>
+      <author>yourname@example.com (yourname)</author>
+      <guid>/2016/04/24/what-is-hugo/</guid>
+      <description>Hugo is a general-purpose website framework. Technically speaking, Hugo is a static site generator. Unlike other systems which dynamically build a page every time a visitor requests one, Hugo does the building when you create your content. Since websites are viewed far more often than they are edited, Hugo is optimized for website viewing while providing a great writing experience.
+Sites built with Hugo are extremely fast and very secure.</description>
+    </item>
+    
+    <item>
+      <title>Introduction</title>
+      <link>/2016/04/21/introduction/</link>
+      <pubDate>Thu, 21 Apr 2016 02:50:28 +0200</pubDate>
+      <author>yourname@example.com (yourname)</author>
+      <guid>/2016/04/21/introduction/</guid>
+      <description>Hugo is written in Go with support for multiple platforms.
+The latest release can be found at Hugo Releases. We currently provide pre-built binaries for &amp;nbsp;Windows, &amp;nbsp;Linux, &amp;nbsp;FreeBSD and &amp;nbsp;OS&amp;nbsp;X (Darwin) for x64, i386 and ARM architectures.
+Hugo may also be compiled from source wherever the Go compiler tool chain can run, e.g. for other operating systems including DragonFly BSD, OpenBSD, Plan&amp;nbsp;9 and Solaris. See http://golang.org/doc/install/source for the full set of supported combinations of target operating systems and compilation architectures.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/2015/07/23/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <author>yourname@example.com (yourname)</author>
+      <guid>/2015/07/23/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+  </channel>
+</rss>
