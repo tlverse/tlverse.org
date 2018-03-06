@@ -2,9 +2,7 @@
 date = "2016-04-21T02:50:28+02:00"
 draft = false
 title = ""
-
 +++
-
 # Welcome to the tlverse!
 
 The tlverse is an effort to overhaul the Targeted Learning software ecosystem in R. Inspired by the [tidyverse](https://tidyverse.org), we aim to construct a collection of R packages that work well together and foster further development in a unified fashion.
