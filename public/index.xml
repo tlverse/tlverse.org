@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tlverse</title>
-    <link>http://www.tlverse.org/</link>
-    <description>Recent content on tlverse</description>
+    <title>Welcome on tlverse</title>
+    <link>/</link>
+    <description>Recent content in Welcome on tlverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>jeremyrcoyle@gmail.com (Jeremy Coyle)</managingEditor>
@@ -11,18 +11,16 @@
     <copyright>(c) 2018</copyright>
     <lastBuildDate>Thu, 21 Apr 2016 02:50:28 +0200</lastBuildDate>
     
-	<atom:link href="http://www.tlverse.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>http://www.tlverse.org/</link>
-      <pubDate>Thu, 21 Apr 2016 02:50:28 +0200</pubDate>
+      <link>/1/01/01/dummy_post/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>jeremyrcoyle@gmail.com (Jeremy Coyle)</author>
-      <guid>http://www.tlverse.org/</guid>
-      <description>Welcome to the tlverse! The tlverse is an effort to overhaul the Targeted Learning software ecosystem in R. Inspired by the tidyverse, we aim to construct a collection of R packages that work well together and foster further development in a unified fashion.
-Currently, tlverse is comprised of the following core packages:
- sl3 for SuperLearning tmle3 for TMLE (Targeted Minimum Loss-based Estimation)  as well as the following helper packages:</description>
+      <guid>/1/01/01/dummy_post/</guid>
+      <description>without this, the template breaks</description>
     </item>
     
   </channel>
