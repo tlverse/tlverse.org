@@ -1,5 +1,5 @@
 # hostname (and path) to the root
-baseurl = "http://www.tlverse.org"
+baseurl = "https://www.tlverse.org"
 
 # english language only
 languageCode = "en"

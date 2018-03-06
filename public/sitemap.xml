@@ -3,26 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://www.tlverse.org/</loc>
+    <loc>https://www.tlverse.org/</loc>
     <lastmod>2016-04-21T02:50:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.tlverse.org/1/01/01/dummy_post/</loc>
+    <loc>https://www.tlverse.org/1/01/01/dummy_post/</loc>
   </url>
   
   <url>
-    <loc>http://www.tlverse.org/post/</loc>
+    <loc>https://www.tlverse.org/post/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.tlverse.org/tags/</loc>
+    <loc>https://www.tlverse.org/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.tlverse.org/topics/</loc>
+    <loc>https://www.tlverse.org/topics/</loc>
     <priority>0</priority>
   </url>
   
