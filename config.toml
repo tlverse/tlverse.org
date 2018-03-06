@@ -1,4 +1,146 @@
-theme = "hugo-multi-bootswatch"
-baseURL = "http://tlverse.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+# hostname (and path) to the root
+baseurl = "http://www.tlverse.org"
+
+# english language only
+languageCode = "en"
+
+# SES friendly url:s
+canonifyurls = true
+
+# Frontmatter format
+# "yaml", "toml", "json"
+metaDataFormat = "toml"
+
+# Theme to use (located in /themes/THEMENAME/)
+theme = "hugo-bootstrap-premium"
+
+# Pagination
+paginate = 10
+paginatePath = "page"
+
+[permalinks]
+post = "/:year/:month/:day/:filename/"
+code = "/:filename/"
+
+[taxonomies]
+tag = "tags"
+topic = "topics"
+
+[author]
+name = "Jeremy Coyle"
+email = "jeremyrcoyle@gmail.com"
+
+[params]
+# bootswatch theme name, unmark and select one: cerulean, cosmo, cyborg, darkly,
+# default, flatly, journal,  lumen, paper, readable, sandstone, simplex,
+# slate, spacelab, superhero, united, yeti.
+
+bootswatchtheme = "flatly"
+
+# menu for changing language. This changes languages with js and stores the choice with the help of JavaScript in a Cookie. Then the path is rewritten with pathnamereplace.js. The name of the md files needs to have the same name for each language abbreviation to work correctly. Example: showcase.en.md and showcase.sv.md. It only works if DefaultContentLanguageInSubdir = true
+switchlang = false
+# You can use markdown here.
+BrandImage = "images/tlverse-logo.png" #top header brand image.
+brand = "tlverse" # brand image alt text.
+topline = "It's not tidy, but it's targeted!"
+footline = ""
+
+customJS = []
+customCSS = ["/css/style_custom.css"]
+
+# Text for the top menu link, which goes to the root URL for the site.
+home = "tlverse"
+
+
+# Show a sidebar menu
+showRightSidebar = false
+
+# Select a syntax highlight.
+# Check the static/css/highlight directory for options.
+highlight = "default"
+
+# Google Analytics.
+googleAnalytics = "Your Google Analytics tracking code"
+
+# Sidebar social links.
+github = "tlverse" # Your Github profile ID
+
+[blackfriday]
+angledQuotes = true
+fractions = false
+hrefTargetBlank = false
+latexDashes = true
+plainIdAnchors = true
+extensions = []
+extensionmask = []
+
+# Menus
+# If you want active menu items highlighted for internal pages don't add them here, they need to be added in each files front matter.
+# like this:
+#[menu]
+#     [menu.main]
+#        name = "Showcase"
+#        weight = 3
+#        identifier = "showcase"
+# i18n menus. A menu will be added for each language to the right in the top menu. This menu will switch to the selected language. Remember to add the corresponding language in pathnamereplace.js.
+#[[Languages.sv.menu.switchlang]]
+#  name = "English"
+#  identifier = ""
+#  weight = 4
+#  url = "en"
+
+
+[Languages]
+[Languages.en]
+languageCode = "en"
+weight = 1
+copyright = "(c) 2018"
+title = "tlverse" # Site title
+
+# main menu
+
+[[Languages.en.menu.main]]
+name = "sl3"
+weight = 1
+identifier = ""
+url = "http://sl3.tlverse.org"
+pre = ""
+
+[[Languages.en.menu.main]]
+name = "tmle3"
+weight = 2
+identifier = ""
+url = "http://tmle3.tlverse.org"
+pre = ""
+
+[[Languages.en.menu.main]]
+name = "delayed"
+weight = 3
+identifier = ""
+url = "http://delayed.tlverse.org"
+pre = ""
+
+[[Languages.en.menu.main]]
+name = "origami"
+weight = 4
+identifier = ""
+url = "http://origami.tlverse.org"
+pre = ""
+
+# right menu
+
+[[Languages.en.menu.right]]
+name = "github"
+weight = 1
+identifier = ""
+url = "http://github.com/tlverse/"
+pre = ""
+
+# footer menu
+
+# [[Languages.en.menu.footer]] # add  links to the bottom right corner.
+# name = "Disclaimer"
+# pre = "<i>&middot;</i>"
+# identifier = "disclaimer"
+# weight = 1
+# url = "/disclaimer/"
