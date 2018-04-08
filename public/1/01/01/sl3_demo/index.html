@@ -1,0 +1,245 @@
+<p>q–
+author: “Nima Hejazi, Jeremy Coyle, Ivana Malenica, Oleg Sofrygin”
+categories: [ “R”, “data science”, “machine learning”, “computing” ]
+tags: [ “R”, “data science”, “machine learning”, “computing” ]
+date: “2018-04-08”
+description: “Simplifying machine learning in R through pipelines”
+featured: “”
+featuredalt: “”
+featuredpath: “”
+linktitle: “”
+title: “sl3: Machine Learning Pipelines for R”
+type: “post”
+#comments: false
+disableComments: true
+published: false
+output:
+blogdown::html_page:
+toc: false</p>
+<hr />
+
+<p>Common in the language of modern data science are words such as “munging,”
+“massaging,” “mining” – all words denoting the interactive process by which the
+analyst extracts some form of deliverable inference from a given data set. These
+terms express, among other things, the (often) convoluted process by which a set
+of pre-processing and estimation procedures are applied to an input data set in
+order to transform said data set into a
+<a href="http://vita.had.co.nz/papers/tidy-data.html">“tidy”</a> output data set from which
+informative visualizations and summaries may be easily extracted. A formalism
+that captures this involved process is that of machine learning <em>pipelines</em>. A
+<em>pipeline</em>, popularized by the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">method of the same
+name</a>
+in Python’s <a href="http://scikit-learn.org/stable/index.html">scikit-learn library</a>,
+may be thought of as a simple bundle that documents procedures to be applied to
+as input data set in a particular order, ultimately resulting in a tidy output
+data set.</p>
+<p>Recently, the pipeline idiom has made its way into the R programming language,
+via the new <a href="https://github.com/jeremyrcoyle/sl3"><code>sl3</code> R package</a>. A concrete
+understanding of the utility of pipelines is best developed by example – so,
+that’s precisely what we’ll do! In the following, we’ll apply the concept of a
+machine learning pipeline to the canonical <a href="">iris data set</a>, combining a series
+of learners (machine learning algorithms for estimation/classification) with
+Principal Components analysis, a simple pre-processing step.</p>
+<pre class="r"><code>library(datasets)
+library(tidyverse)
+library(data.table)
+library(caret)
+library(sl3)
+set.seed(352)</code></pre>
+<p>…</p>
+<pre class="r"><code>data(iris)
+iris &lt;- iris %&gt;%
+  as_tibble(.)
+iris</code></pre>
+<pre><code>## # A tibble: 150 x 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+##  1         5.10        3.50         1.40       0.200 setosa 
+##  2         4.90        3.00         1.40       0.200 setosa 
+##  3         4.70        3.20         1.30       0.200 setosa 
+##  4         4.60        3.10         1.50       0.200 setosa 
+##  5         5.00        3.60         1.40       0.200 setosa 
+##  6         5.40        3.90         1.70       0.400 setosa 
+##  7         4.60        3.40         1.40       0.300 setosa 
+##  8         5.00        3.40         1.50       0.200 setosa 
+##  9         4.40        2.90         1.40       0.200 setosa 
+## 10         4.90        3.10         1.50       0.100 setosa 
+## # ... with 140 more rows</code></pre>
+<p>…</p>
+<p>To create very simple training and testing splits, we’ll rely on the popular
+<a href="https://topepo.github.io/caret/"><code>caret</code> R package</a>:</p>
+<pre class="r"><code>trn_indx &lt;- createDataPartition(iris$Species, p = .8, list = FALSE,
+                                times = 1) %&gt;%
+  as.numeric()
+tst_indx &lt;- which(!(seq_len(nrow(iris)) %in% trn_indx))</code></pre>
+<p>Now that we have our training and testing splits, we can organize the data into
+tasks – the central bookkeeping object in the <code>sl3</code> framework. Essentially,
+tasks represent a, well, data analytic <em>task</em> that is to be solved by invoking
+the various machine learning algorithms made available by <code>sl3</code>.</p>
+<pre class="r"><code># a task with the data from the training split
+iris_task_train &lt;- sl3_Task$new(
+  data = iris[trn_indx, ],
+  covariates = colnames(iris)[-5],
+  outcome = colnames(iris)[5],
+  outcome_type = &quot;categorical&quot;
+)
+iris_task_train</code></pre>
+<pre><code>## A sl3 Task with 120 obs and these nodes:
+## $covariates
+## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
+## 
+## $outcome
+## [1] &quot;Species&quot;
+## 
+## $id
+## NULL
+## 
+## $weights
+## NULL
+## 
+## $offset
+## NULL</code></pre>
+<pre class="r"><code># a task with the data from the testing split
+iris_task_test &lt;- sl3_Task$new(
+  data = iris[tst_indx, ],
+  covariates = colnames(iris)[-5],
+  outcome = colnames(iris)[5],
+  outcome_type = &quot;categorical&quot;
+)
+iris_task_test</code></pre>
+<pre><code>## A sl3 Task with 30 obs and these nodes:
+## $covariates
+## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
+## 
+## $outcome
+## [1] &quot;Species&quot;
+## 
+## $id
+## NULL
+## 
+## $weights
+## NULL
+## 
+## $offset
+## NULL</code></pre>
+<p>Having set up the data properly, let’s proceed to design <em>pipelines</em> that we can
+rely on for processing and analyzing the data. A <strong>pipeline</strong> simply represents
+a set of machine learning procedures to be invoked sequentially, with the
+results derived from earlier algorithms in the pipeline being used to train
+those later in the pipeline. Thus, a pipeline is a closed <em>end-to-end</em> system
+for resolving the problem posed by an <code>sl3</code> task.</p>
+<p>We’ll rely on PCA for dimension reduction, gathering only the two most important
+principal component dimensions to use in training our classification models.
+Since this is a quick experiment with a well-studied data set, we’ll use just
+two classification procedures: (1) Logistic regression with regularization
+(e.g., the LASSO) and (2) Random Forests.</p>
+<pre class="r"><code>pca_learner &lt;- Lrnr_pca$new(n_comp = 2)
+glmnet_learner &lt;- Lrnr_glmnet$new()
+rf_learner &lt;- Lrnr_randomForest$new()</code></pre>
+<p>Above, we merely instantiate the learners by invoking the <code>$new()</code> method of
+each of the appropriate objects. We now have a PCA method that generates and
+extracts just the first two principal components derived from the design matrix.</p>
+<p>Other than our PCA learner, we’ve also instantiated a regularized logistic
+regression model (<code>glmnet_learner</code> above) based on the implementation available
+through the popular <a href="https://cran.r-project.org/package=glmnet"><code>glmnet</code> R
+package</a>, as well as a random forest
+model based on the canonical implementation available in the
+<a href="https://cran.r-project.org/package=randomForest"><code>randomForest</code> R package</a>.</p>
+<p>Now that our individual learners are set up, we can intuitively string them into
+pipelines like so</p>
+<pre class="r"><code>pca_to_glmnet &lt;- Pipeline$new(pca_learner, glmnet_learner)
+pca_to_rf &lt;- Pipeline$new(pca_learner, rf_learner)</code></pre>
+<p>The first pipeline above merely invokes our PCA learner, extracting the first
+two principal components of the design matrix from the input task and passing
+these as inputs to the logistic regression model. Similarly, the second pipeline
+invokes PCA and passes the results to our random forest model.</p>
+<p>To streamline the training of our pipelines, we’ll bundle them into a single
+<em>stack</em>, then train the model stack all at once. Similar in spirit to a
+pipeline, a stack is a bundle of <code>sl3</code> learner objects that are to be trained
+together. The principle difference is that learners in a pipeline are trained
+sequentially, as described above, while those in a stack are trained in
+parallel (not in the computational sense, though we can, of course, speed up the
+fitting procedure with parallelization). Thus, the models in a stack are trained
+independently of one another.</p>
+<p>Now, let’s go ahead a generate a stack and train the two pipelines on our
+training split of the iris dataset:</p>
+<pre class="r"><code>model_stack &lt;- Stack$new(pca_to_glmnet, pca_to_rf)
+fit_model_stack &lt;- model_stack$train(iris_task_train)</code></pre>
+<pre class="r"><code>out_model_stack &lt;- fit_model_stack$predict()
+pipe1_preds &lt;- as.data.table(t(matrix(unlist(out_model_stack[[1]]),
+                                      ncol = length(iris_task_train$Y))))
+pipe2_preds &lt;- as.data.table(t(matrix(unlist(out_model_stack[[2]]),
+                                      ncol = length(iris_task_train$Y))))</code></pre>
+<p>After extracting the predicted probabilities of each observation being in a
+given class (the iris species), we now clean up the results a bit to make them
+more report-able</p>
+<pre class="r"><code>outcome_names &lt;- c(&quot;setosa&quot;, &quot;versicolor&quot;, &quot;virginica&quot;)
+setnames(pipe1_preds, outcome_names)
+setnames(pipe2_preds, outcome_names)
+
+# get class predictions
+pipe1_classes &lt;- as.factor(outcome_names[apply(pipe1_preds, 1, which.max)])
+pipe2_classes &lt;- as.factor(outcome_names[apply(pipe2_preds, 1, which.max)])</code></pre>
+<p>Now let’s take a look at the results…</p>
+<pre class="r"><code>(cfmat_pipe1 &lt;- confusionMatrix(pipe1_classes, iris_task_train$Y))</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##             Reference
+## Prediction   setosa versicolor virginica
+##   setosa         40          0         0
+##   versicolor      0         36         3
+##   virginica       0          4        37
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9417          
+##                  95% CI : (0.8835, 0.9762)
+##     No Information Rate : 0.3333          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.9125          
+##  Mcnemar&#39;s Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: setosa Class: versicolor Class: virginica
+## Sensitivity                 1.0000            0.9000           0.9250
+## Specificity                 1.0000            0.9625           0.9500
+## Pos Pred Value              1.0000            0.9231           0.9024
+## Neg Pred Value              1.0000            0.9506           0.9620
+## Prevalence                  0.3333            0.3333           0.3333
+## Detection Rate              0.3333            0.3000           0.3083
+## Detection Prevalence        0.3333            0.3250           0.3417
+## Balanced Accuracy           1.0000            0.9313           0.9375</code></pre>
+<p>Let’s find out whether our pipeline of PCA and Random Forest fared any better
+than the one with PCA and GLMs:</p>
+<pre class="r"><code>(cfmat_pipe2 &lt;- confusionMatrix(pipe2_classes, iris_task_train$Y))</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##             Reference
+## Prediction   setosa versicolor virginica
+##   setosa         40          0         0
+##   versicolor      0         39         3
+##   virginica       0          1        37
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9667          
+##                  95% CI : (0.9169, 0.9908)
+##     No Information Rate : 0.3333          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.95            
+##  Mcnemar&#39;s Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: setosa Class: versicolor Class: virginica
+## Sensitivity                 1.0000            0.9750           0.9250
+## Specificity                 1.0000            0.9625           0.9875
+## Pos Pred Value              1.0000            0.9286           0.9737
+## Neg Pred Value              1.0000            0.9872           0.9634
+## Prevalence                  0.3333            0.3333           0.3333
+## Detection Rate              0.3333            0.3250           0.3083
+## Detection Prevalence        0.3333            0.3500           0.3167
+## Balanced Accuracy           1.0000            0.9688           0.9563</code></pre>

@@ -1,5 +1,8 @@
 # hostname (and path) to the root
-baseurl = "https://www.tlverse.org"
+baseurl = "https://tlverse.org"
+
+# ignore files
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 # english language only
 languageCode = "en"
@@ -130,8 +133,15 @@ pre = ""
 # right menu
 
 [[Languages.en.menu.right]]
-name = "github"
+name = "blog"
 weight = 1
+identifier = ""
+url = "/post/"
+pre = ""
+
+[[Languages.en.menu.right]]
+name = "github"
+weight = 2
 identifier = ""
 url = "http://github.com/tlverse/"
 pre = ""

@@ -1,0 +1,201 @@
+---
+author: "Jeremy Coyle, Nima Hejazi, Ivana Malenica, Oleg Sofrygin"
+categories: [ "R", "data science", "machine learning", "computing" ]
+tags: [ "R", "data science", "machine learning", "computing" ]
+date: "2018-04-08"
+description: "Simplifying machine learning in R through pipelines"
+featured: ""
+featuredalt: ""
+featuredpath: ""
+linktitle: ""
+title: "sl3: Machine Learning Pipelines for R"
+type: "post"
+#comments: false
+disableComments: true
+published: false
+output:
+  blogdown::html_page:
+    toc: false
+
+---
+
+<!--
+IN PROGRESS:
+* https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html
+* https://github.com/jeremyrcoyle/sl3/issues/104
+-->
+
+Common in the language of modern data science are words such as "munging,"
+"massaging," "mining" -- all words denoting the interactive process by which the
+analyst extracts some form of deliverable inference from a given data set. These
+terms express, among other things, the (often) convoluted process by which a set
+of pre-processing and estimation procedures are applied to an input data set in
+order to transform said data set into a
+["tidy"](http://vita.had.co.nz/papers/tidy-data.html) output data set from which
+informative visualizations and summaries may be easily extracted. A formalism
+that captures this involved process is that of machine learning _pipelines_. A
+_pipeline_, popularized by the [method of the same
+name](http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)
+in Python's [scikit-learn library](http://scikit-learn.org/stable/index.html),
+may be thought of as a simple bundle that documents procedures to be applied to
+as input data set in a particular order, ultimately resulting in a tidy output
+data set.
+
+Recently, the pipeline idiom has made its way into the R programming language,
+via the new [`sl3` R package](https://github.com/jeremyrcoyle/sl3). A concrete
+understanding of the utility of pipelines is best developed by example -- so,
+that's precisely what we'll do! In the following, we'll apply the concept of a
+machine learning pipeline to the canonical [iris data set](), combining a series
+of learners (machine learning algorithms for estimation/classification) with
+Principal Components analysis, a simple pre-processing step.
+
+```{r setup_pkgs, message=FALSE}
+library(datasets)
+library(tidyverse)
+library(data.table)
+library(caret)
+library(sl3)
+set.seed(352)
+```
+
+...
+
+```{r prepare_data, message=FALSE}
+data(iris)
+iris <- iris %>%
+  as_tibble(.)
+iris
+```
+
+...
+
+To create very simple training and testing splits, we'll rely on the popular
+[`caret` R package](https://topepo.github.io/caret/):
+
+```{r}
+trn_indx <- createDataPartition(iris$Species, p = .8, list = FALSE,
+                                times = 1) %>%
+  as.numeric()
+tst_indx <- which(!(seq_len(nrow(iris)) %in% trn_indx))
+```
+
+Now that we have our training and testing splits, we can organize the data into
+tasks -- the central bookkeeping object in the `sl3` framework. Essentially,
+tasks represent a, well, data analytic _task_ that is to be solved by invoking
+the various machine learning algorithms made available by `sl3`.
+
+```{r make_iris_task}
+# a task with the data from the training split
+iris_task_train <- sl3_Task$new(
+  data = iris[trn_indx, ],
+  covariates = colnames(iris)[-5],
+  outcome = colnames(iris)[5],
+  outcome_type = "categorical"
+)
+iris_task_train
+
+# a task with the data from the testing split
+iris_task_test <- sl3_Task$new(
+  data = iris[tst_indx, ],
+  covariates = colnames(iris)[-5],
+  outcome = colnames(iris)[5],
+  outcome_type = "categorical"
+)
+iris_task_test
+```
+
+Having set up the data properly, let's proceed to design _pipelines_ that we can
+rely on for processing and analyzing the data. A __pipeline__ simply represents
+a set of machine learning procedures to be invoked sequentially, with the
+results derived from earlier algorithms in the pipeline being used to train
+those later in the pipeline. Thus, a pipeline is a closed _end-to-end_ system
+for resolving the problem posed by an `sl3` task.
+
+We'll rely on PCA for dimension reduction, gathering only the two most important
+principal component dimensions to use in training our classification models.
+Since this is a quick experiment with a well-studied data set, we'll use just
+two classification procedures: (1) Logistic regression with regularization
+(e.g., the LASSO) and (2) Random Forests.
+
+```{r}
+pca_learner <- Lrnr_pca$new(n_comp = 2)
+glmnet_learner <- Lrnr_glmnet$new()
+rf_learner <- Lrnr_randomForest$new()
+```
+
+Above, we merely instantiate the learners by invoking the `$new()` method of
+each of the appropriate objects. We now have a PCA method that generates and
+extracts just the first two principal components derived from the design matrix.
+
+Other than our PCA learner, we've also instantiated a regularized logistic
+regression model (`glmnet_learner` above) based on the implementation available
+through the popular [`glmnet` R
+package](https://cran.r-project.org/package=glmnet), as well as a random forest
+model based on the canonical implementation available in the
+[`randomForest` R package](https://cran.r-project.org/package=randomForest).
+
+Now that our individual learners are set up, we can intuitively string them into
+pipelines like so
+
+```{r}
+pca_to_glmnet <- Pipeline$new(pca_learner, glmnet_learner)
+pca_to_rf <- Pipeline$new(pca_learner, rf_learner)
+```
+
+The first pipeline above merely invokes our PCA learner, extracting the first
+two principal components of the design matrix from the input task and passing
+these as inputs to the logistic regression model. Similarly, the second pipeline
+invokes PCA and passes the results to our random forest model.
+
+To streamline the training of our pipelines, we'll bundle them into a single
+_stack_, then train the model stack all at once. Similar in spirit to a
+pipeline, a stack is a bundle of `sl3` learner objects that are to be trained
+together. The principle difference is that learners in a pipeline are trained
+sequentially, as described above, while those in a stack are trained in
+parallel (not in the computational sense, though we can, of course, speed up the
+fitting procedure with parallelization). Thus, the models in a stack are trained
+independently of one another.
+
+Now, let's go ahead a generate a stack and train the two pipelines on our
+training split of the iris dataset:
+
+```{r}
+model_stack <- Stack$new(pca_to_glmnet, pca_to_rf)
+fit_model_stack <- model_stack$train(iris_task_train)
+```
+
+```{r}
+out_model_stack <- fit_model_stack$predict()
+pipe1_preds <- as.data.table(t(matrix(unlist(out_model_stack[[1]]),
+                                      ncol = length(iris_task_train$Y))))
+pipe2_preds <- as.data.table(t(matrix(unlist(out_model_stack[[2]]),
+                                      ncol = length(iris_task_train$Y))))
+```
+
+After extracting the predicted probabilities of each observation being in a
+given class (the iris species), we now clean up the results a bit to make them
+more report-able
+
+```{r}
+outcome_names <- c("setosa", "versicolor", "virginica")
+setnames(pipe1_preds, outcome_names)
+setnames(pipe2_preds, outcome_names)
+
+# get class predictions
+pipe1_classes <- as.factor(outcome_names[apply(pipe1_preds, 1, which.max)])
+pipe2_classes <- as.factor(outcome_names[apply(pipe2_preds, 1, which.max)])
+```
+
+Now let's take a look at the results...
+
+```{r confusion_mat_glmnet}
+(cfmat_pipe1 <- confusionMatrix(pipe1_classes, iris_task_train$Y))
+```
+
+Let's find out whether our pipeline of PCA and Random Forest fared any better
+than the one with PCA and GLMs:
+
+```{r confusion_mat_rf}
+(cfmat_pipe2 <- confusionMatrix(pipe2_classes, iris_task_train$Y))
+```
+
