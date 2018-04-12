@@ -173,10 +173,7 @@ from the two pipelines in our stack.
 
 ```{r predict_and_cleanup}
 out_model_stack <- fit_model_stack$predict(iris_task_test)
-pipe1_preds <- as.data.table(t(matrix(unlist(out_model_stack[[1]]),
-                                      ncol = length(iris_task_test$Y))))
-pipe2_preds <- as.data.table(t(matrix(unlist(out_model_stack[[2]]),
-                                      ncol = length(iris_task_test$Y))))
+pipe_preds <- lapply(out_model_stack, unpack_predictions)
 ```
 
 After extracting the predicted species probabilities for each observation (the
@@ -184,13 +181,9 @@ most likely iris species), we now clean up the results a bit, just to make them
 easier to report
 
 ```{r get_class_preds}
-outcome_names <- c("setosa", "versicolor", "virginica")
-setnames(pipe1_preds, outcome_names)
-setnames(pipe2_preds, outcome_names)
-
 # get class predictions
-pipe1_classes <- as.factor(outcome_names[apply(pipe1_preds, 1, which.max)])
-pipe2_classes <- as.factor(outcome_names[apply(pipe2_preds, 1, which.max)])
+pipe1_classes <- predict_classes(pipe_preds[[1]])
+pipe2_classes <- predict_classes(pipe_preds[[2]])
 ```
 
 A standard way to summarize results in machine learning problems is the
