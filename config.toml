@@ -1,5 +1,5 @@
 # hostname (and path) to the root
-baseurl = "https://tlverse.org"
+baseurl = "/"
 
 # ignore files
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
