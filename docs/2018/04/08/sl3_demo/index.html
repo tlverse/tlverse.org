@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>sl3: Machine Learning Pipelines for R  &middot; tlverse</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="Simplifying machine learning in R using pipelines" />
+
+<meta name="keywords" content="R, data science, machine learning, statistical computing, ">
+
+
+<meta property="og:title" content="sl3: Machine Learning Pipelines for R  &middot; tlverse ">
+<meta property="og:site_name" content="tlverse"/>
+<meta property="og:url" content="/2018/04/08/sl3_demo/" />
+<meta property="og:locale" content="en">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Simplifying machine learning in R using pipelines"/>
+<meta property="og:article:published_time" content="2018-04-08T00:00:00Z" />
+<meta property="og:article:modified_time" content="2018-04-08T00:00:00Z" />
+
+  
+    
+<meta property="og:article:tag" content="R">
+    
+<meta property="og:article:tag" content="data science">
+    
+<meta property="og:article:tag" content="machine learning">
+    
+<meta property="og:article:tag" content="statistical computing">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@" />
+<meta name="twitter:title" content="sl3: Machine Learning Pipelines for R" />
+<meta name="twitter:description" content="Simplifying machine learning in R using pipelines" />
+<meta name="twitter:url" content="/2018/04/08/sl3_demo/" />
+<meta name="twitter:domain" content="/">
+  
+
+  
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "sl3: Machine Learning Pipelines for R",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2018-04-08",
+    "description": "Simplifying machine learning in R using pipelines",
+    "wordCount": 1503
+  }
+</script>
+  
+
+
+
+<link rel="canonical" href="/2018/04/08/sl3_demo/" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+<link rel="icon" href="/favicon.png">
+<meta name="generator" content="Hugo 0.37" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="/css/bootswatch/flatly/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+<link rel="stylesheet" href="/css/style_custom.css">
+
+
+
+  <link rel="stylesheet" href="/css/highlight/default.css">
+
+
+</head>
+<body data-ng-app="myapp" data-ng-controller="MyController" data-ng-mouseleave="MouseLeave($event)">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+          
+          <a class="navbar-brand-img" href="/">
+            <img class="navbar-brand-img" alt="tlverse" src="images/tlverse-logo.png">
+            
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-left">
+            
+            
+            <li class="">
+
+              <a href="http://tlverse.org/sl3/" >
+                
+                sl3
+              </a>
+            </li>
+            
+            <li class="">
+
+              <a href="http://tlverse.org/tmle3/" >
+                
+                tmle3
+              </a>
+            </li>
+            
+            <li class="">
+
+              <a href="http://tlverse.org/delayed/" >
+                
+                delayed
+              </a>
+            </li>
+            
+            <li class="">
+
+              <a href="http://tlverse.org/hal9001/" >
+                
+                hal9001
+              </a>
+            </li>
+            
+            <li class="">
+
+              <a href="http://tlverse.org/origami/" >
+                
+                origami
+              </a>
+            </li>
+              
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li class="">
+
+              <a href="/post/" >
+                
+                blog
+              </a>
+            </li>
+            
+            <li class="">
+
+              <a href="http://github.com/tlverse/" >
+                
+                github
+              </a>
+            </li>
+              
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+  </header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="text-center">
+
+    <h1>sl3: Machine Learning Pipelines for R
+</h1>
+
+    <div class="metas">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2018-04-08">8 Apr, 2018</time>
+</small>
+
+
+  <small>
+    &middot; by Jeremy Coyle, Nima Hejazi, Ivana Malenica, Oleg Sofrygin
+  
+  &middot; Read in about 8 min
+  &middot; (1503 words)
+  &middot; 
+<span class="share-box">Share this on:
+    <a href="https://www.facebook.com/sharer/sharer.php?u=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-facebook-official "></i></a>
+
+    <a href="https://twitter.com/intent/tweet?text=sl3%3a%20Machine%20Learning%20Pipelines%20for%20R&amp;url=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-twitter"></i></a>
+
+    <a href="https://plus.google.com/share?url=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-google-plus"></i></a>
+
+    <a href="http://www.reddit.com/submit?url=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-reddit"></i></a>
+
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2018%2f04%2f08%2fsl3_demo%2f&amp;title=sl3%3a%20Machine%20Learning%20Pipelines%20for%20R" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-linkedin"></i></a>
+
+    <a href="mailto:?subject=sl3%3a%20Machine%20Learning%20Pipelines%20for%20R&amp;body=Check out this site %2f2018%2f04%2f08%2fsl3_demo%2f" data-proofer-ignore=""><i class="fa fa-envelope"></i></a>
+  </span>
+
+  </small>
+
+<div class="margin-10">
+  <i class="fa fa-tags"></i>
+  
+  <a href="/tags/r" class="label label-primary">R</a>
+  
+  <a href="/tags/data-science" class="label label-primary">data science</a>
+  
+  <a href="/tags/machine-learning" class="label label-primary">machine learning</a>
+  
+  <a href="/tags/statistical-computing" class="label label-primary">statistical computing</a>
+  
+
+
+</div>
+
+<br>
+</div>
+
+  </div>
+</div>
+
+      <div class="content">
+  <p>Common in the language of modern data science are words such as “munging,” “massaging,” “mining” – terms denoting the interactive process by which the analyst extracts some form of deliverable inference from the data set at hand. These terms express, among other things, the often convoluted process by which a set of pre-processing and estimation procedures are applied to an input data set in order to transform it into a <a href="http://vita.had.co.nz/papers/tidy-data.html">“tidy”</a> data set from which informative visualizations and summaries may be easily extracted. A formalism that captures this involved process is that of machine learning <em>pipelines</em>. A <em>pipeline</em> – popularized by the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">method of the same name</a> in Python’s <a href="http://scikit-learn.org/stable/index.html">scikit-learn library</a> – may be thought of as an <em>ordered</em> set of instructions corresponding to procedures to be applied to the input data set, with the ultimate goal of producing a tidy output data set.</p>
+<p>Recently, the new <a href="https://github.com/tlverse/sl3"><code>sl3</code> R package</a> introduced the pipeline idiom into the R programming language. A concrete understanding of the utility of pipelines is best developed by example – so, that’s precisely what we’ll aim to do here. In the following, we’ll apply the concept of a machine learning pipeline to the canonical <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">iris data set</a>, combining a series of machine learning algorithms for classification with principal components analysis, a simple pre-processing step for dimensionality reduction.</p>
+<pre class="r"><code>library(datasets)
+library(tidyverse)</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.1</code></pre>
+<pre class="r"><code>library(data.table)
+library(caret)
+library(sl3)
+set.seed(352)</code></pre>
+<p>In the above, we simply load a few of the R packages that we’ll rely on throughout this demonstration and set a seed in order to control any randomness in the estimation procedure that follows. Next, let’s load the iris data set:</p>
+<pre class="r"><code>data(iris)
+iris &lt;- iris %&gt;%
+  as_tibble(.)
+iris</code></pre>
+<pre><code>## # A tibble: 150 x 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+##  1          5.1         3.5          1.4         0.2 setosa 
+##  2          4.9         3            1.4         0.2 setosa 
+##  3          4.7         3.2          1.3         0.2 setosa 
+##  4          4.6         3.1          1.5         0.2 setosa 
+##  5          5           3.6          1.4         0.2 setosa 
+##  6          5.4         3.9          1.7         0.4 setosa 
+##  7          4.6         3.4          1.4         0.3 setosa 
+##  8          5           3.4          1.5         0.2 setosa 
+##  9          4.4         2.9          1.4         0.2 setosa 
+## 10          4.9         3.1          1.5         0.1 setosa 
+## # ... with 140 more rows</code></pre>
+<p>As we see above, the iris data set consists of a simple structure: numerical measurements of the length and width of sepals and petals, alongside the species of the observed flower (restricted to three: <em>Iris setosa</em>, <em>Isis versicolor</em>, <em>Iris virginica</em>).</p>
+<p>To create very simple training and testing splits, we’ll rely on the popular <a href="https://topepo.github.io/caret/"><code>caret</code> R package</a>:</p>
+<pre class="r"><code>trn_indx &lt;- createDataPartition(iris$Species, p = .8, list = FALSE,
+                                times = 1) %&gt;%
+  as.numeric()
+tst_indx &lt;- which(!(seq_len(nrow(iris)) %in% trn_indx))</code></pre>
+<p>Now that we have our training and testing splits, we can organize the data into tasks – the central bookkeeping object in the <code>sl3</code> framework. Essentially, tasks represent a, well, data analytic <em>task</em> that is to be solved by invoking the various machine learning algorithms made available through <code>sl3</code>.</p>
+<pre class="r"><code># a task with the data from the training split
+iris_task_train &lt;- sl3_Task$new(
+  data = iris[trn_indx, ],
+  covariates = colnames(iris)[-5],
+  outcome = colnames(iris)[5],
+  outcome_type = &quot;categorical&quot;
+)
+
+# a task with the data from the testing split
+iris_task_test &lt;- sl3_Task$new(
+  data = iris[tst_indx, ],
+  covariates = colnames(iris)[-5],
+  outcome = colnames(iris)[5],
+  outcome_type = &quot;categorical&quot;
+)
+
+# let&#39;s take a look at the training data task
+iris_task_train</code></pre>
+<pre><code>## A sl3 Task with 120 obs and these nodes:
+## $covariates
+## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
+## 
+## $outcome
+## [1] &quot;Species&quot;
+## 
+## $id
+## NULL
+## 
+## $weights
+## NULL
+## 
+## $offset
+## NULL</code></pre>
+<p>Having set up the data properly, let’s proceed to design <em>pipelines</em> that we can rely on for processing and analyzing the data. A <strong>pipeline</strong> simply represents a set of machine learning procedures to be invoked sequentially, with the results derived from earlier algorithms in the pipeline being used to train those later in the pipeline. Thus, a pipeline is a closed <em>end-to-end system</em> for resolving the problem posed by an <code>sl3</code> task.</p>
+<p>We’ll rely on PCA for dimension reduction, gathering only the two most important principal component dimensions to use in training our classification models. Since this is a quick experiment with a well-studied data set, we’ll use just two classification procedures: (1) Logistic regression with regularization (e.g., the LASSO) and (2) Random Forests.</p>
+<pre class="r"><code>pca_learner &lt;- Lrnr_pca$new(n_comp = 2)
+glmnet_learner &lt;- Lrnr_glmnet$new()
+rf_learner &lt;- Lrnr_randomForest$new()</code></pre>
+<p>Above, we merely instantiate the learners by invoking the <code>$new()</code> method of each of the appropriate objects. We now have a machine learning object that invokes PCA to generate and extract just the first two (from the argument <code>n_comp</code> above) principal components derived from the design matrix.</p>
+<p>Other than our PCA learner, we’ve also instantiated a regularized logistic regression model (<code>glmnet_learner</code> above) based on the implementation available through the popular <a href="https://cran.r-project.org/package=glmnet"><code>glmnet</code> R package</a>, as well as a random forest model based on the canonical implementation available in the <a href="https://cran.r-project.org/package=randomForest"><code>randomForest</code> R package</a>.</p>
+<p>Now that our individual learners are set up, we can intuitively string them into pipelines by invoking the appropriate <code>$new()</code> method like so</p>
+<pre class="r"><code>pca_to_glmnet &lt;- Pipeline$new(pca_learner, glmnet_learner)
+pca_to_rf &lt;- Pipeline$new(pca_learner, rf_learner)</code></pre>
+<p>The first pipeline above merely invokes our PCA learner, extracting the first two principal components of the design matrix from the input task and passing these as inputs to the regularized logistic regression model. Similarly, the second pipeline invokes PCA and passes the results to our random forest model.</p>
+<p>To streamline the training of our pipelines, we’ll bundle them into a single <em>stack</em>, then train the model stack all at once. Similar in spirit to a pipeline, a <strong>stack</strong> is a bundle of <code>sl3</code> learner objects that are to be trained together. The principle difference is that learners in a pipeline are trained sequentially, as described above, while those in a stack are trained in simultaneously. Thus, the models in a stack are trained independently of one another.</p>
+<p>Now, forward – let’s generate a stack and train the two pipelines on our training split of the iris data set:</p>
+<pre class="r"><code>model_stack &lt;- Stack$new(pca_to_glmnet, pca_to_rf)
+fit_model_stack &lt;- model_stack$train(iris_task_train)</code></pre>
+<p>Having trained our stacked pipelines, we can now predict on the testing data set simply by feeding the object <code>iris_task_test</code> that we created above to our model stack using the <code>$predict()</code> method. After doing that, we’ll simply do a bit of bookkeeping to extract the predicted class probabilities (of each observation) from the two pipelines in our stack.</p>
+<pre class="r"><code>out_model_stack &lt;- fit_model_stack$predict(iris_task_test)
+pipe_preds &lt;- lapply(out_model_stack, unpack_predictions)</code></pre>
+<p>After extracting the predicted species probabilities for each observation (the most likely iris species), we now clean up the results a bit, just to make them easier to report</p>
+<pre class="r"><code># get class predictions
+pipe1_classes &lt;- predict_classes(pipe_preds[[1]])
+pipe2_classes &lt;- predict_classes(pipe_preds[[2]])</code></pre>
+<p>A standard way to summarize results in machine learning problems is the <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html">confusion matrix</a>. Now, let’s take a look at the results, using the handy <a href="https://rdrr.io/cran/caret/man/confusionMatrix.html"><code>confusionMatrix</code> function</a> from <a href="https://topepo.github.io/caret/index.html"><code>caret</code></a> to compare our predicted classes to the true species in the holdout/testing data set.</p>
+<pre class="r"><code>(cfmat_pipe1 &lt;- confusionMatrix(pipe1_classes, iris_task_test$Y))</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##             Reference
+## Prediction   setosa versicolor virginica
+##   setosa         10          0         0
+##   versicolor      0          9         2
+##   virginica       0          1         8
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9             
+##                  95% CI : (0.7347, 0.9789)
+##     No Information Rate : 0.3333          
+##     P-Value [Acc &gt; NIR] : 1.665e-10       
+##                                           
+##                   Kappa : 0.85            
+##  Mcnemar&#39;s Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: setosa Class: versicolor Class: virginica
+## Sensitivity                 1.0000            0.9000           0.8000
+## Specificity                 1.0000            0.9000           0.9500
+## Pos Pred Value              1.0000            0.8182           0.8889
+## Neg Pred Value              1.0000            0.9474           0.9048
+## Prevalence                  0.3333            0.3333           0.3333
+## Detection Rate              0.3333            0.3000           0.2667
+## Detection Prevalence        0.3333            0.3667           0.3000
+## Balanced Accuracy           1.0000            0.9000           0.8750</code></pre>
+<p>Let’s find out whether our pipeline of PCA and Random Forest fared any better than the one with PCA and GLMs above:</p>
+<pre class="r"><code>(cfmat_pipe2 &lt;- confusionMatrix(pipe2_classes, iris_task_test$Y))</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##             Reference
+## Prediction   setosa versicolor virginica
+##   setosa         10          0         0
+##   versicolor      0          9         2
+##   virginica       0          1         8
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9             
+##                  95% CI : (0.7347, 0.9789)
+##     No Information Rate : 0.3333          
+##     P-Value [Acc &gt; NIR] : 1.665e-10       
+##                                           
+##                   Kappa : 0.85            
+##  Mcnemar&#39;s Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: setosa Class: versicolor Class: virginica
+## Sensitivity                 1.0000            0.9000           0.8000
+## Specificity                 1.0000            0.9000           0.9500
+## Pos Pred Value              1.0000            0.8182           0.8889
+## Neg Pred Value              1.0000            0.9474           0.9048
+## Prevalence                  0.3333            0.3333           0.3333
+## Detection Rate              0.3333            0.3000           0.2667
+## Detection Prevalence        0.3333            0.3667           0.3000
+## Balanced Accuracy           1.0000            0.9000           0.8750</code></pre>
+<p>The predictions looks good!</p>
+<hr />
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<ul>
+<li>We’ve taken a look at how to efficiently perform machine learning tasks with the <code>sl3</code> R package.</li>
+<li>We’ve examined standard machine learning idioms, including <em>tasks</em>, <em>pipelines</em>, and <em>stacks</em>.</li>
+<li>We’ve examined a simple case of training and predicting with pipelines on the canonical Iris data set.</li>
+</ul>
+</div>
+
+</div>
+
+
+      <footer>
+  
+<span class="share-box">Share this on:
+    <a href="https://www.facebook.com/sharer/sharer.php?u=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-facebook-official "></i></a>
+
+    <a href="https://twitter.com/intent/tweet?text=sl3%3a%20Machine%20Learning%20Pipelines%20for%20R&amp;url=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-twitter"></i></a>
+
+    <a href="https://plus.google.com/share?url=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-google-plus"></i></a>
+
+    <a href="http://www.reddit.com/submit?url=%2f2018%2f04%2f08%2fsl3_demo%2f" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-reddit"></i></a>
+
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2f2018%2f04%2f08%2fsl3_demo%2f&amp;title=sl3%3a%20Machine%20Learning%20Pipelines%20for%20R" onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-linkedin"></i></a>
+
+    <a href="mailto:?subject=sl3%3a%20Machine%20Learning%20Pipelines%20for%20R&amp;body=Check out this site %2f2018%2f04%2f08%2fsl3_demo%2f" data-proofer-ignore=""><i class="fa fa-envelope"></i></a>
+  </span>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
+  
+
+
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
+
+</footer>
+
+    </div>
+    
+  </div>
+</div>
+    
+<footer class="footer hidden-print">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+              
+    
+
+    
+<div class="container copyright">
+    <small>
+  &copy; 2018
+
+  </small>
+</div>
+
+
+
+        </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="//s3.amazonaws.com/mailmunch/static/site.js" id="mailmunch-script" data-mailmunch-site-id="" async="async"></script>
+
+
+
+<script src="//load.sumome.com/" data-sumo-site-id="" async="async"></script>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+
+<script src="/js/highlight.pack.js"></script>
+<script src="/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script>
+var ENABLE_POPOVER = "", 
+EXPIRE_COOKIE = "", 
+SHOW_MODAL_TIMEOUT = "", 
+MOUSE_LEAVE = "", 
+MODAL_SIZE = "", 
+POST_URL = "", 
+SIGNUP_HEADER = "",
+HEADER_IMAGE = "",
+IMG_DESCRIPTION = "",
+SIGNUP_TEXT = "",
+INPUT_PLACEHOLDER = "",
+SUBMIT_BUTTON = "",
+SUCCESS_MESSAGE = "",
+ERROR_MESSAGE = "",
+OPTIN = "",
+COOKIE_NAME = "",
+CONTENTLANGUAGE = ""; 
+</script>
+
+
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax//MathJax.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax//config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    for(var all in MathJax.Hub.getAllJax()) {
+        all.SourceElement().parentNode.className += ' has-jax';
+
+    }
+});
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+

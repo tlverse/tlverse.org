@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on tlverse</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on tlverse</description>
+    <title>R on tlverse</title>
+    <link>/tags/r/</link>
+    <description>Recent content in R on tlverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>jeremyrcoyle@gmail.com (Jeremy Coyle)</managingEditor>
@@ -11,7 +11,7 @@
     <copyright>(c) 2018</copyright>
     <lastBuildDate>Sun, 08 Apr 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

@@ -13,18 +13,19 @@ in a unified fashion.
 
 Currently, the tlverse is comprised of the following core packages:
 
-* [`sl3`](https://sl3.tlverse.org) for Super Learning
-* [`tmle3`](https://tmle3.tlverse.org/) for Targeted Minimum Loss-based
+* [`sl3`](https://tlverse.org/sl3/) for Super Learning
+* [`tmle3`](https://tlverse.org/tmle3/) for Targeted Minimum Loss-based
     Estimation (TMLE)
 
 as well as the following helper packages:
 
-* [`delayed`](https://delayed.tlverse.org) for parallelizing dependent tasks
-* [`origami`](https://origami.tlverse.org) for cross-validation
+* [`delayed`](https://tlverse.org/delayed/) for parallelizing dependent tasks
+* [`origami`](https://tlverse.org/origami/) for cross-validation
 
 and packages for individual `tmle3` parameters:
 
-_coming soon_
+* [`tmle3shift`](https://tlverse.org/tmle3shift/) Shift Intervention
+* [`tmle3mopttx`](https://tlverse.org/tmle3mopttx/) Optimal Treatment
 
 ---
 

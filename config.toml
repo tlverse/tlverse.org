@@ -2,7 +2,6 @@
 publishDir = "docs"
 baseurl = "/"
 
->>>>>>> 5999db7cafffdb8f734d5018f537568d7596a1c4
 # ignore files
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
@@ -108,28 +107,35 @@ title = "tlverse" # Site title
 name = "sl3"
 weight = 1
 identifier = ""
-url = "http://sl3.tlverse.org"
+url = "http://tlverse.org/sl3/"
 pre = ""
 
 [[Languages.en.menu.main]]
 name = "tmle3"
 weight = 2
 identifier = ""
-url = "http://tmle3.tlverse.org"
+url = "http://tlverse.org/tmle3/"
 pre = ""
 
 [[Languages.en.menu.main]]
 name = "delayed"
 weight = 3
 identifier = ""
-url = "http://delayed.tlverse.org"
+url = "http://tlverse.org/delayed/"
 pre = ""
 
 [[Languages.en.menu.main]]
 name = "origami"
 weight = 4
 identifier = ""
-url = "http://origami.tlverse.org"
+url = "http://tlverse.org/origami/"
+pre = ""
+
+[[Languages.en.menu.main]]
+name = "hal9001"
+weight = 4
+identifier = ""
+url = "http://tlverse.org/hal9001/"
 pre = ""
 
 # right menu

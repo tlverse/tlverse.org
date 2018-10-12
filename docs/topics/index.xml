@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Topics on tlverse</title>
-    <link>https://tlverse.org/topics/</link>
+    <link>/topics/</link>
     <description>Recent content in Topics on tlverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -10,7 +10,7 @@
     <webMaster>jeremyrcoyle@gmail.com (Jeremy Coyle)</webMaster>
     <copyright>(c) 2018</copyright>
     
-	<atom:link href="https://tlverse.org/topics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/topics/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
