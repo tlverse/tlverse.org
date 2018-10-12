@@ -1,6 +1,8 @@
 # hostname (and path) to the root
-baseurl = "https://tlverse.org"
 publishDir = "docs"
+baseurl = "/"
+
+>>>>>>> 5999db7cafffdb8f734d5018f537568d7596a1c4
 # ignore files
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
