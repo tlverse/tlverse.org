@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>data science on tlverse</title>
-    <link>/tags/data-science/</link>
+    <link>https://tlverse.org/tags/data-science/</link>
     <description>Recent content in data science on tlverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>jeremyrcoyle@gmail.com (Jeremy Coyle)</managingEditor>
     <webMaster>jeremyrcoyle@gmail.com (Jeremy Coyle)</webMaster>
     <copyright>(c) 2018</copyright>
-    <lastBuildDate>Sun, 08 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="/tags/data-science/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://tlverse.org/tags/data-science/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>sl3: Machine Learning Pipelines for R</title>
-      <link>/2018/04/08/sl3_demo/</link>
+      <link>https://tlverse.org/2018/04/08/sl3_demo/</link>
       <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
       <author>jeremyrcoyle@gmail.com (Jeremy Coyle)</author>
-      <guid>/2018/04/08/sl3_demo/</guid>
+      <guid>https://tlverse.org/2018/04/08/sl3_demo/</guid>
       <description>Common in the language of modern data science are words such as “munging,” “massaging,” “mining” – terms denoting the interactive process by which the analyst extracts some form of deliverable inference from the data set at hand. These terms express, among other things, the often convoluted process by which a set of pre-processing and estimation procedures are applied to an input data set in order to transform it into a “tidy” data set from which informative visualizations and summaries may be easily extracted.</description>
     </item>
     

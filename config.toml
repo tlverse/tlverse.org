@@ -1,6 +1,6 @@
 # hostname (and path) to the root
 publishDir = "docs"
-baseurl = "/"
+baseurl = "https://tlverse.org"
 
 # ignore files
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
@@ -107,35 +107,35 @@ title = "tlverse" # Site title
 name = "sl3"
 weight = 1
 identifier = ""
-url = "http://tlverse.org/sl3/"
+url = "https://tlverse.org/sl3/"
 pre = ""
 
 [[Languages.en.menu.main]]
 name = "tmle3"
 weight = 2
 identifier = ""
-url = "http://tlverse.org/tmle3/"
+url = "https://tlverse.org/tmle3/"
 pre = ""
 
 [[Languages.en.menu.main]]
 name = "delayed"
 weight = 3
 identifier = ""
-url = "http://tlverse.org/delayed/"
+url = "https://tlverse.org/delayed/"
 pre = ""
 
 [[Languages.en.menu.main]]
 name = "origami"
 weight = 4
 identifier = ""
-url = "http://tlverse.org/origami/"
+url = "https://tlverse.org/origami/"
 pre = ""
 
 [[Languages.en.menu.main]]
 name = "hal9001"
 weight = 4
 identifier = ""
-url = "http://tlverse.org/hal9001/"
+url = "https://tlverse.org/hal9001/"
 pre = ""
 
 # right menu
@@ -151,7 +151,7 @@ pre = ""
 name = "github"
 weight = 2
 identifier = ""
-url = "http://github.com/tlverse/"
+url = "https://github.com/tlverse/"
 pre = ""
 
 # footer menu

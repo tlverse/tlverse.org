@@ -2,47 +2,47 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on tlverse</title>
-    <link>/tags/</link>
+    <link>https://tlverse.org/tags/</link>
     <description>Recent content in Tags on tlverse</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>jeremyrcoyle@gmail.com (Jeremy Coyle)</managingEditor>
     <webMaster>jeremyrcoyle@gmail.com (Jeremy Coyle)</webMaster>
     <copyright>(c) 2018</copyright>
-    <lastBuildDate>Sun, 08 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://tlverse.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>data science</title>
-      <link>/tags/data-science/</link>
+      <link>https://tlverse.org/tags/data-science/</link>
       <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
       <author>jeremyrcoyle@gmail.com (Jeremy Coyle)</author>
-      <guid>/tags/data-science/</guid>
+      <guid>https://tlverse.org/tags/data-science/</guid>
       <description></description>
     </item>
     
     <item>
       <title>machine learning</title>
-      <link>/tags/machine-learning/</link>
+      <link>https://tlverse.org/tags/machine-learning/</link>
       <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
       <author>jeremyrcoyle@gmail.com (Jeremy Coyle)</author>
-      <guid>/tags/machine-learning/</guid>
+      <guid>https://tlverse.org/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>/tags/r/</link>
+      <link>https://tlverse.org/tags/r/</link>
       <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
       <author>jeremyrcoyle@gmail.com (Jeremy Coyle)</author>
-      <guid>/tags/r/</guid>
+      <guid>https://tlverse.org/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>statistical computing</title>
-      <link>/tags/statistical-computing/</link>
+      <link>https://tlverse.org/tags/statistical-computing/</link>
       <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
       <author>jeremyrcoyle@gmail.com (Jeremy Coyle)</author>
-      <guid>/tags/statistical-computing/</guid>
+      <guid>https://tlverse.org/tags/statistical-computing/</guid>
       <description></description>
     </item>
     
