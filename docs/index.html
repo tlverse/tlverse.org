@@ -22,17 +22,13 @@
 <meta property="og:url" content="/" />
 <meta property="og:locale" content="en">
 
-
 <meta property="og:type" content="website" />
 
-
-
-<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Welcome" />
 
 <link rel="canonical" href="/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
 <link rel="icon" href="/favicon.png">
-<meta name="generator" content="Hugo 0.37" />
+<meta name="generator" content="Hugo 0.110.0">
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -41,19 +37,28 @@
 
 
 
-    <link rel="stylesheet" href="/css/bootswatch/flatly/bootstrap.min.css">
 
-
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/style.css">
-
-
-<link rel="stylesheet" href="/css/style_custom.css">
+    
+    
 
 
 
-  <link rel="stylesheet" href="/css/highlight/default.css">
 
+
+
+
+
+    
+    
+
+
+
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bundle.min.ed179fed27538697b1b6e28877c89e62c562343b598c6d4309b21362072e7ff909cd519ec33242338b7703b1a0af87802f3c123be1a8b0141701456145956740.css" >
 
 </head>
 <body data-ng-app="myapp" data-ng-controller="MyController" data-ng-mouseleave="MouseLeave($event)">
@@ -70,73 +75,60 @@
         
           
           <a class="navbar-brand-img" href="/">
-            <img class="navbar-brand-img" alt="tlverse" src="images/tlverse-logo.png">
+            <img alt="tlverse" src="images/tlverse-logo.png">
             
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-left">
-            
-            
-            <li class="">
-
-              <a href="http://tlverse.org/sl3/" >
-                
-                sl3
-              </a>
-            </li>
-            
-            <li class="">
-
-              <a href="http://tlverse.org/tmle3/" >
-                
-                tmle3
-              </a>
-            </li>
-            
-            <li class="">
-
-              <a href="http://tlverse.org/delayed/" >
-                
-                delayed
-              </a>
-            </li>
-            
-            <li class="">
-
-              <a href="http://tlverse.org/hal9001/" >
-                
-                hal9001
-              </a>
-            </li>
-            
-            <li class="">
-
-              <a href="http://tlverse.org/origami/" >
-                
-                origami
-              </a>
-            </li>
-              
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             
             
             <li class="">
-
-              <a href="/post/" >
-                
-                blog
-              </a>
+              
+		<a href="http://tlverse.org/sl3/"  title="sl3">
+                  
+                  sl3
+                </a>
+              
             </li>
             
             <li class="">
-
-              <a href="http://github.com/tlverse/" >
-                
-                github
-              </a>
+              
+		<a href="http://tlverse.org/tmle3/"  title="tmle3">
+                  
+                  tmle3
+                </a>
+              
             </li>
+            
+            <li class="">
+              
+		<a href="http://tlverse.org/delayed/"  title="delayed">
+                  
+                  delayed
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+		<a href="http://tlverse.org/hal9001/"  title="hal9001">
+                  
+                  hal9001
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+		<a href="http://tlverse.org/origami/"  title="origami">
+                  
+                  origami
+                </a>
+              
+            </li>
+            
+            
               
           </ul>
         </div>
@@ -146,66 +138,57 @@
   </header>
 
 
-<div class="container">
-	
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-sm-12">
+        
+        
+          <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
+  <h2><a href="/post/">Posts</a>
+</h2>
 
-<h1 id="welcome-to-the-tlverse">Welcome to the <code>tlverse</code>!</h1>
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2018-04-08">8 Apr, 2018</time>
+</small>
 
-<p>The <code>tlverse</code> is an effort to overhaul the Targeted Learning software ecosystem
-in R. Inspired by the <a href="https://tidyverse.org"><code>tidyverse</code></a>, we aim to construct
-a collection of R packages that work well together and foster future development
-in a unified fashion.</p>
+    
 
-<p>Currently, the tlverse is comprised of the following core packages:</p>
-
-<ul>
-<li><a href="https://tlverse.org/sl3/"><code>sl3</code></a> for Super Learning</li>
-<li><a href="https://tlverse.org/tmle3/"><code>tmle3</code></a> for Targeted Minimum Loss-based
-Estimation (TMLE)</li>
-</ul>
-
-<p>as well as the following helper packages:</p>
-
-<ul>
-<li><a href="https://tlverse.org/delayed/"><code>delayed</code></a> for parallelizing dependent tasks</li>
-<li><a href="https://tlverse.org/origami/"><code>origami</code></a> for cross-validation</li>
-</ul>
-
-<p>and packages for individual <code>tmle3</code> parameters:</p>
-
-<ul>
-<li><a href="https://tlverse.org/tmle3shift/"><code>tmle3shift</code></a> Shift Intervention</li>
-<li><a href="https://tlverse.org/tmle3mopttx/"><code>tmle3mopttx</code></a> Optimal Treatment</li>
-</ul>
-
-<hr />
-
-<h2 id="installation">Installation</h2>
-
-<p>Some of these packages are not yet available on
-<a href="https://cran.r-project.org/">CRAN</a>, so for now the best option is to install
-directly via GitHub using
-<a href="https://www.rstudio.com/products/rpackages/devtools/"><code>devtools</code></a>:</p>
-
-<pre><code>devtools::install_github(&quot;tlverse/tlverse&quot;)
-</code></pre>
-
-<hr />
-
-<h2 id="getting-started">Getting Started</h2>
-
-<p>For now, the individual package pages are the best place to go to dive into the
-<code>tlverse</code>. We hope to expand this site with documentation that spans across the
-different packages, and provide a gentle introduction to the <code>tlverse</code> as a
-whole.</p>
-
+  </div>
 </div>
+
+    <p>
+  
+
+</p>
+
+
+    <p class="lead"><a href="/post/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+        
+        
+
+      </div>
+      
+    </div>
+
+  </div>
+
     
 <footer class="footer hidden-print">
   <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
            <div class="pull-left">
+  <a class="toplink" href="javascript:" id="return-to-top">back to top</a>
 </div>
 <div class="pull-right">
 
@@ -219,7 +202,7 @@ whole.</p>
     
 <div class="container copyright">
     <small>
-  &copy; 2018
+  (c) 2018
 
   </small>
 </div>
@@ -239,13 +222,14 @@ whole.</p>
 
 <script src="//load.sumome.com/" data-sumo-site-id="" async="async"></script>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
 
 
-<script src="/js/highlight.pack.js"></script>
-<script src="/js/site.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
 
 
 <script>
@@ -256,26 +240,32 @@ whole.</p>
 </script>
 
 <script>
-var ENABLE_POPOVER = "", 
-EXPIRE_COOKIE = "", 
-SHOW_MODAL_TIMEOUT = "", 
-MOUSE_LEAVE = "", 
-MODAL_SIZE = "", 
-POST_URL = "", 
-SIGNUP_HEADER = "",
-HEADER_IMAGE = "",
-IMG_DESCRIPTION = "",
-SIGNUP_TEXT = "",
-INPUT_PLACEHOLDER = "",
-SUBMIT_BUTTON = "",
-SUCCESS_MESSAGE = "",
-ERROR_MESSAGE = "",
-OPTIN = "",
-COOKIE_NAME = "",
-CONTENTLANGUAGE = ""; 
+var ENABLE_POPOVER =  null , 
+EXPIRE_COOKIE =  null , 
+SHOW_MODAL_TIMEOUT =  null , 
+MOUSE_LEAVE =  null , 
+MODAL_SIZE =  null , 
+POST_URL =  null , 
+SIGNUP_HEADER =  null ,
+HEADER_IMAGE =  null ,
+IMG_DESCRIPTION =  null ,
+SIGNUP_TEXT =  null ,
+INPUT_PLACEHOLDER =  null ,
+SUBMIT_BUTTON =  null ,
+SUCCESS_MESSAGE =  null ,
+ERROR_MESSAGE =  null ,
+OPTIN =  null ,
+COOKIE_NAME =  null ,
+CONTENTLANGUAGE =  null ; 
 </script>
 
 
+
+
+
+
+
+<script  src="/js/bundle.min.73c0982516c7a00ade08c12711f9b893d477425d6b15c7c25495b6bc235547731042d9d7939eb6b883d84cc25ffa91b466ee7bea7c16a57d67c1a458a6dab164.js" ></script>
 
 
 
@@ -306,7 +296,6 @@ MathJax.Hub.Config({
     }
 });
 </script>
-
 
 
 

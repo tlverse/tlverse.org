@@ -3,7 +3,8 @@
   <header>
     {{ partial "bloc/content/h1-title.html" . }}
   </header>
-  {{ range $index, .Paginator.Pages }}
+  {{ .Content }}
+  {{ range $index, $foo := .Paginator.Pages  }}
     {{ .Render "section.li" }}
   {{ end }}
   {{ partial "bloc/content/pagination.html" . }}

@@ -1,4 +1,3 @@
-@import url(/css/google-fonts.css);
 
 html {
   position: relative;
@@ -26,14 +25,11 @@ body > .container {
 
 .navbar-brand {
 padding: 20px;
-vertical-align: center;
+vertical-align: baseline;;
 }
 
 .navbar-brand-img {
     padding: 0px;
-    height: 60px;
-    width: 60px;
-
 }
 @media screen and (max-width: 768px) {
     a.navbar-brand-img>img {
